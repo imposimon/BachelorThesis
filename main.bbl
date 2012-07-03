@@ -1,0 +1,213 @@
+\begin{thebibliography}{10}
+
+\bibitem{1}
+Gong Cheng and Yuzhong Qu.
+\newblock Searching linked objects with falcons: Approach, implementation and
+  evaluation.
+\newblock {\em Int. J. Semantic Web Inf. Syst.}, 5(3):49--70, 2009.
+
+\bibitem{2}
+Kevin Chen-Chuan Chang, Bin He, Chengkai Li, Mitesh Patel, and Zhen Zhang.
+\newblock Structured databases on the web: observations and implications.
+\newblock {\em SIGMOD Rec.}, 33(3):61--70, September 2004.
+
+\bibitem{3}
+Tim Berners-Lee, Wendy Hall, James Hendler, Nigel Shadbolt, and Daniel~J.
+  Weitzner.
+\newblock Creating a science of the web.
+\newblock {\em Science}, 313(5788):769--771, 2006.
+
+\bibitem{4}
+Dimitrios-Emmanuel Spanos, Periklis Stavrou, and Nikolas Mitrou.
+\newblock Bringing relational databases into the semantic web: A survey.
+\newblock {\em Semantic Web Journal}, 2012.
+\newblock to appear.
+
+\bibitem{5}
+Henryk Rybi\'{n}ski.
+\newblock On first-order-logic databases.
+\newblock {\em ACM Trans. Database Syst.}, 12(3):325--349, September 1987.
+
+\bibitem{6}
+Peter~F Patel-Schneider, Patrick Hayes, and Ian Horrocks.
+\newblock Owl web ontology language semantics and abstract syntax.
+\newblock {\em W3C Recommendation}, 10(REC-owl-semantics-20040210), 2004.
+
+\bibitem{7}
+瞿裕忠 {,} 胡伟 {,} 郑东栋~{,} 仲新宇.
+\newblock 关系数据库模式和本体间映射的研究综述.
+\newblock {\em 计算机研究与发展}, 45(2):300--309, 2008.
+
+\bibitem{8}
+Stephen Muggleton and Cao Feng.
+\newblock Efficient induction of logic programs.
+\newblock In {\em New Generation Computing}. Academic Press, 1990.
+
+\bibitem{33}
+Cristian~P{\'e}rez de~Laborda and Stefan Conrad.
+\newblock Relational.owl: a data and schema representation format based on owl.
+\newblock In {\em Proceedings of the 2nd Asia-Pacific conference on Conceptual
+  modelling - Volume 43}, APCCM '05, pages 89--96, Darlinghurst, Australia,
+  Australia, 2005. Australian Computer Society, Inc.
+
+\bibitem{34}
+Csongor Nyulas and Samson Tu.
+\newblock Datamaster – a plug-in for importing schemas and data from
+  relational databases into protégé.
+\newblock In {\em In Proceedings of 10 th International Protégé Conference},
+  2007.
+
+\bibitem{35}
+Carlo Curino, Giorgio Orsi, Emanuele Panigati, and Letizia Tanca.
+\newblock Accessing and documenting relational databases through owl
+  ontologies.
+\newblock In {\em Proceedings of the 8th International Conference on Flexible
+  Query Answering Systems}, FQAS '09, pages 431--442, Berlin, Heidelberg, 2009.
+  Springer-Verlag.
+
+\bibitem{11}
+Christian Bizer and Andy Seaborne.
+\newblock {\em D2RQ - Treating non-RDF Databases as Virtual RDF Graphs
+  (Poster)}.
+\newblock Citeseer, 2004.
+
+\bibitem{13}
+Juan Sequeda, Marcelo Arenas, Daniel~P. Miranker, and Daniel~P. Miranker.
+\newblock On directly mapping relational databases to rdf and owl.
+\newblock In {\em WWW}, pages 649--658, 2012.
+
+\bibitem{25}
+Huajun Chen, Yimin Wang, Heng Wang, Yuxin Mao, Jinmin Tang, Cunyin Zhou, Ainin
+  Yin, and Zhaohui Wu.
+\newblock Towards a semantic web of relational databases: a practical semantic
+  toolkit and an in-use case from traditional chinese medicine.
+\newblock In {\em Proceedings of the 5th international conference on The
+  Semantic Web}, ISWC'06, pages 750--763, Berlin, Heidelberg, 2006.
+  Springer-Verlag.
+
+\bibitem{26}
+Raphael Volz, Siegfried Handschuh, Steffen Staab, Ljiljana Stojanovic, and
+  Nenad Stojanovic.
+\newblock Unveiling the hidden bride: deep annotation for mapping and migrating
+  legacy data to the semantic web.
+\newblock {\em Web Semantics: Science, Services and Agents on the World Wide
+  Web}, 1(2):187 -- 206, 2004.
+
+\bibitem{27}
+Petros Papapanagiotou, Polyxeni Katsiouli, Vassileios Tsetsos, Christos
+  Anagnostopoulos, and Stathes Hadjiefthymiades.
+\newblock Ronto: Relational to ontology schema matching.
+\newblock {\em AIS SIGSEMIS Bulletin}, 3(3-4):32–36, 2006.
+
+\bibitem{24}
+Wei Hu and Yuzhong Qu.
+\newblock Discovering simple mappings between relational database schemas and
+  ontologies.
+\newblock In {\em ISWC/ASWC}, pages 225--238, 2007.
+
+\bibitem{28}
+Dejing Dou, Han Qin, and Paea LePendu.
+\newblock Ontograte: towards automatic integration for relational databases and
+  the semantic web through an ontology-based framework.
+\newblock {\em Int. J. Semantic Computing}, 4(1):123--151, 2010.
+
+\bibitem{29}
+Percy~E. Salas, Karin~K. Breitman, Jos{\'e} Viterbo~F., and Marco~A. Casanova.
+\newblock Interoperability by design using the stdtrip tool: an a priori
+  approach.
+\newblock In {\em Proceedings of the 6th International Conference on Semantic
+  Systems}, I-SEMANTICS '10, pages 43:1--43:3, New York, NY, USA, 2010. ACM.
+
+\bibitem{10}
+Yuan An, Alex Borgida, and John Mylopoulos.
+\newblock {\em Inferring Complex Semantic Mappings Between Relational Tables
+  and Ontologies from Simple Correspondences}, volume 3761, pages 1152--1169.
+\newblock Springer, 2005.
+
+\bibitem{30}
+Erhard Rahm and Philip~A. Bernstein.
+\newblock A survey of approaches to automatic schema matching.
+\newblock {\em The VLDB Journal}, 10(4):334--350, December 2001.
+
+\bibitem{31}
+J\'er\^ome Euzenat and Pavel Shvaiko.
+\newblock {\em Ontology matching}.
+\newblock Springer-Verlag, Heidelberg (DE), 2007.
+
+\bibitem{9}
+Raghu Ramakrishnan and Johannes Gehrke.
+\newblock {\em Database Management Systems}, volume~8.
+\newblock McGraw-Hill, 2002.
+
+\bibitem{12}
+徐卓明 {,} 董逸生~{,} 陆阳.
+\newblock 从{ER}模式到{OWL DL}本体的语义保持的翻译.
+\newblock {\em 计算机学报}, 29(10):1786--1796, 2006.
+
+\bibitem{14}
+Roger H.~L. Chiang, Terence~M. Barron, and Veda~C. Storey.
+\newblock Reverse engineering of relational databases: extraction of an eer
+  model from a relational database.
+\newblock {\em Data Knowl. Eng.}, 12(2):107--142, March 1994.
+
+\bibitem{15}
+Yuzhong Qu, Wei Hu, and Gong Cheng.
+\newblock Constructing virtual documents for ontology matching.
+\newblock In {\em WWW}, pages 23--31, 2006.
+
+\bibitem{32}
+Gerard Salton and Michael~J. McGill.
+\newblock {\em Introduction to Modern Information Retrieval}.
+\newblock McGraw-Hill, Inc., New York, NY, USA, 1986.
+
+\bibitem{16}
+Alon~Y. Levy.
+\newblock Logic-based artificial intelligence.
+\newblock chapter Logic-based techniques in data integration, pages 575--595.
+  Kluwer Academic Publishers, Norwell, MA, USA, 2000.
+
+\bibitem{17}
+Bernd Amann, Catriel Beeri, Irini Fundulaki, and Michel Scholl.
+\newblock Ontology-based integration of xml web resources.
+\newblock In {\em Proceedings of the First International Semantic Web
+  Conference on The Semantic Web}, ISWC '02, pages 117--131, London, UK, UK,
+  2002. Springer-Verlag.
+
+\bibitem{18}
+J.~R. Quinlan.
+\newblock Learning logical definitions from relations.
+\newblock {\em Mach. Learn.}, 5(3):239--266, September 1990.
+
+\bibitem{19}
+Nicola Fanizzi, Luigi Iannone, Nicola Di~Mauro, and Floriana Esposito.
+\newblock Tractable feature generation through description logics with value
+  and number restrictions.
+\newblock In {\em Proceedings of the 19th international conference on Advances
+  in Applied Artificial Intelligence: industrial, Engineering and Other
+  Applications of Applied Intelligent Systems}, IEA/AIE'06, pages 629--638,
+  Berlin, Heidelberg, 2006. Springer-Verlag.
+
+\bibitem{20}
+Boris Motik, Ian Horrocks, and Ulrike Sattler.
+\newblock Bridging the gap between owl and relational databases.
+\newblock In {\em Proceedings of the 16th international conference on World
+  Wide Web}, WWW '07, pages 807--816, New York, NY, USA, 2007. ACM.
+
+\bibitem{21}
+Hong-Hai Do and Erhard Rahm.
+\newblock Matching large schemas: Approaches and evaluation.
+\newblock {\em Inf. Syst.}, 32(6):857--885, September 2007.
+
+\bibitem{22}
+Peng Wang, Yuming Zhou, and Baowen Xu.
+\newblock Matching large ontologies based on reduction anchors.
+\newblock In Toby Walsh, editor, {\em IJCAI}, pages 2343--2348. IJCAI/AAAI,
+  2011.
+
+\bibitem{23}
+J{\'e}r{\^o}me David, Fabrice Guillet, and Henri Briand.
+\newblock Association rule ontology matching approach.
+\newblock {\em International Journal of Semantic Web Information Systems},
+  3(2):27--49, 2007.
+
+\end{thebibliography}

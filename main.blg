@@ -1,0 +1,59 @@
+This is BibTeX, Version 0.99d (TeX Live 2011)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: main.aux
+A level-1 auxiliary file: data/chap00.aux
+A level-1 auxiliary file: data/chap01.aux
+A level-1 auxiliary file: data/chap02.aux
+A level-1 auxiliary file: data/chap03.aux
+A level-1 auxiliary file: data/chap04.aux
+A level-1 auxiliary file: data/chap06.aux
+The style file: unsrt.bst
+A level-1 auxiliary file: data/ack.aux
+Database file #1: ref/reference.bib
+Warning--empty chapter and pages in 11
+Warning--can't use both author and editor fields in 10
+Warning--can't use both volume and number fields in 10
+Warning--can't use both volume and number fields in 9
+Warning--empty booktitle in 16
+You've used 35 entries,
+            1791 wiz_defined-function locations,
+            672 strings with 10098 characters,
+and the built_in function-call counts, 9930 in all, are:
+= -- 943
+> -- 375
+< -- 16
++ -- 138
+- -- 103
+* -- 670
+:= -- 1447
+add.period$ -- 116
+call.type$ -- 35
+change.case$ -- 30
+chr.to.int$ -- 0
+cite$ -- 40
+duplicate$ -- 482
+empty$ -- 974
+format.name$ -- 103
+if$ -- 2329
+int.to.chr$ -- 0
+int.to.str$ -- 35
+missing$ -- 40
+newline$ -- 179
+num.names$ -- 37
+pop$ -- 109
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 274
+stack$ -- 0
+substring$ -- 728
+swap$ -- 165
+text.length$ -- 16
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 5
+while$ -- 93
+width$ -- 37
+write$ -- 410
+(There were 5 warnings)

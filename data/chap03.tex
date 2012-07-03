@@ -1,0 +1,164 @@
+\chapter{复杂语义映射的学习}
+\label{chap03}
+
+对于实际的关系数据库模式和本体，除了元素之间的一对一的映射外，还存在不少复杂映射
+，比如带选择条件的映射、一对多映射等。在数据集成领域，复杂映射通常由逻辑
+\cite{16}或查询语言\cite{17}的方式来表达。
+
+复杂映射的学习主要分为以下两个步骤：事实收集和基于归纳逻辑编程的学习。事实收集
+步骤收集训练样例和背景知识，并将其编码为逻辑程序使用的谓词表示形式；基于归纳逻辑
+编程的学习步骤在收集到的训练样例和背景知识上进行学习，最终得到Horn规则形式的复杂
+映射。
+
+\section{事实收集}
+为了实施复杂映射的学习，需要用到第\ref{chap02}章中获得的简单映射，在关系数据库
+和本体的实例数据中进行事实选择。
+
+事实的选择需要利用关系数据库和本体间重叠的实例数据。关系数据库中通常采用实体类型
+关系中的一个记录元组来表示该关系的一个实例，而本体中的实例数据采用对象（object）
+来表示某个类的实例。为了发现实例数据间的重叠部分，本文使用一种简单方法构建实例
+映射。方法能够唯一标识实例的属性，比如数据库中的主键和本体中的函数属性
+（functional property）。如果有$\mathcal{S}$:\emph{sid} 和
+$\mathcal{O}$:\emph{hasSID} 之间的简单映射，当数据库中的某个元组
+\emph{t} 的\emph{sid} 值与本体中某个对象\emph{o} 的\emph{hasSID} 的宾语字面
+值相同时，\emph{t} 与\emph{o} 为一个实例映射。
+
+在完成实例映射后，收集重叠的实例数据，然后根据简单映射进一步在这些重叠实例数据
+中选择归纳逻辑编程所需的事实（fact）数据。
+
+假设$\mathcal{S}$:\emph{E} 和$\mathcal{O}$:\emph{E} 是一个简单映射，
+$\mathcal{S}$:\emph{E} 为关系数据库中的关系或属性，$\mathcal{O}$:\emph{E} 为本体
+中的类或属性。
+
+若$\mathcal{S}$:\emph{E} 为实体类型关系，记作$R_{\emph{ER}}$，则收集
+$pk(R_{\emph{ER}} )$中的实例；若$\mathcal{S}$:\emph{E} 为关系类型关系，记作
+$R_{\emph{RR}}$，而$fk(R_{\emph{RR}})$为$R_{\emph{RR}} $
+中的外键集合，则收集$rel(ref(A_{FKi}))$中的实例
+（$A_{\emph{FKi}} \in fk(R_{\emph{RR}})$）。
+若$\mathcal{S}$:\emph{E} 为非外键属性，记作
+$A_{\emph{NFK}}$，且$rel(A_{\emph{NFK}} )$存在简单映
+射，则收集$rel(A_{\emph{NFK}})$中的实例；
+若$\mathcal{S}$:\emph{E} 为外键属性，记作
+$A_{\emph{FK}}$，且$rel(A_{\emph{FK}} )$和
+$rel(ref(A_{\emph{FK}}))$存在简单映射，则收集
+$rel(A_{\emph{FK}})$和$rel(ref(A_{\emph{FK}}))$的实例；
+
+
+若$\mathcal{O}$:\emph{E} 为类$C$，令其子集集合为$Sub_C$，则收集形如
+$<o,$rdf:type$,C_i>$的RDF三元组 （$C_i \in Sub_C \cup \{C\}$）；
+若$\mathcal{O}$:\emph{E} 为数据类型属性$P_d$，则收集形如$<o,P_d,litt>$的三元组；
+若$\mathcal{O}$:\emph{E} 为对象属性$P_o$，则收集形如$<o,P_o,o^\prime>$的三元组。
+
+
+在选择出事实后，将其编码为谓词逻辑的形式，本体中类的实例采用其类名作为一元谓词，
+实例作为常元项，例如\emph{Course}($c_1$)。属性则采用其属性名作为二元谓词，属性
+的主语和宾语分别作为常元项，例如\emph{hasCourseName}($c_1$,``database'')。注意，
+对于存在父类的本体类，编码时需要将该类及其所有父类作为谓词，例如图
+\ref{fig:onto}所示的本体中，类\emph{Graduate}存在父类\emph{Student}，如果收集
+到类\emph{Graduate}的实例$s_1$，则要将其编码为两个谓词文字
+\emph{Graduate}($s_1$)和\emph{Student}($s_1$)。
+关系数据库中的实例，采用其关系名作为谓词，记录
+数据作为常元项，如\emph{student}($s_1$,``bob'',$c_1$)。
+
+\section{基于归纳逻辑编程的学习}
+
+归纳逻辑编程（inductive logic programming）是一类采用逻辑程序作为知识表示形式的
+机器学习方法。由于采用逻辑程序对知识进行表示，归纳逻辑编程比传统的机器学习算法
+表达能力更强，学习出的逻辑规则更易理解。FOIL\cite{18}和GOLEM\cite{8}是两个最有
+代表性的归纳逻辑编程算法。
+
+GOLEM算法具有良好的可扩展性，在处理大数据集时拥有很高的效率（FOIL的可扩展性较差
+）。受到GOLEM的启发，在学习时采用自底向上、数据驱动的策略，使用泛化策略从具体的
+数据中学习出一般的模型。
+
+GOLEM算法的核心泛化技术称为相对最小一般泛化（relative least general
+ generalization，简称RLGG）\cite{8}，RLGG表示两个子句关于背景知识的最小一般泛化,
+需要同时满足以下两个条件：
+\begin{equation}
+B \land rlgg_B(c_1,c_2) \vdash c_1 \land c_2
+\label{eq:rlgg1}
+\end{equation}
+\begin{equation}
+(B \land c \vdash c_1 \land c_2) \Rightarrow c \succeq _\theta rlgg_B(c_1,c_2)
+\label{eq:rlgg2}
+\end{equation}
+
+其中$B$表示背景知识集，$rlgg_B(c_1,c_2)$表示子句$c_1$和$c_2$关于背景知识集$B$
+的RLGG子句。式\ref{eq:rlgg2}中的$\succeq _\theta$表示$\theta$-包含（具体定义参
+见\cite{8}）,
+$\theta$-包含描述了子句间的一般化关系，如$c \succeq _\theta rlgg_B(c_1,c_2)$
+表示子句$c$比子句$rlgg_B(c_1,c_2)$更加一般化，反之后者比前者更加具体化。
+
+基于GOLEM算法进行学习的过程见算法\ref{alg1}。将事实中的关系数据库实例数据作为
+正例，本体实例数据作为背景知识。首先随机选择若干正例加入训练集合，为训练集合中
+的每对正例构造RLGG，选择覆盖正例最多的RLGG作为最优子句。然后进行迭代，将最优子
+句未覆盖的正例加入训练集重新构造最优子句，直至最优子句覆盖的正例不再增加。最后
+消解最优子句中的无关文字，得到最终学习结果。
+\renewcommand{\algorithmicinput}{\textbf{输入：}}
+\renewcommand{\algorithmicoutput}{\textbf{输出：}}
+\floatname{algorithm}{算法}
+
+
+\begin{algorithm}                      
+\caption{GOLEM}          
+\label{alg1}                           
+\begin{algorithmic}[1]                    
+\INPUT 正实例集合$\varepsilon^+$ \ 背景知识$B$
+\OUTPUT 目标规则$R$
+	\STATE $S \leftarrow \underset{\{e,e^\prime\}}{\operatorname{\ arg \ max}} \ |covered(rlgg_B(e,e^\prime))| \quad (e, e^\prime \in \varepsilon^+)$
+	\REPEAT
+	\STATE $ \varepsilon^+_s \leftarrow randomSample(\varepsilon^+,s)$ \\
+	\STATE $e_{best} \leftarrow \underset{e^\prime}{\operatorname{\ arg \ max}} \ |covered(rlgg_B(S \cup \{e^\prime\}))|  \quad (e^\prime \in \varepsilon^+_s)$ \\
+	\STATE $ S \leftarrow S \cup \{e_{best}\} $
+	\STATE $ \varepsilon^+ \leftarrow \varepsilon^+ - covered(rlgg_B(S))$
+	\UNTIL{$|covered(rlgg_B(S))|$ remains}
+	\STATE $ R \leftarrow reduce(rlgg_B(S))$
+\end{algorithmic}
+\end{algorithm}
+
+
+通过归纳逻辑编程学习算法学习出的复杂映射可分为以下3类，以图\ref{fig:db}中所示
+的关系数据库模式$\mathcal{S}$和图\ref{fig:onto}中所示的本体$\mathcal{O}$为例举
+例说明。
+
+\theoremstyle{definition}
+\newtheorem{type}{\heiti{类型}}
+\begin{type}
+\label{typ1}
+关系数据库模式中实体类型关系和非外键类型属性分别与本体中类和数据类型属性的复杂
+映射。例如：
+
+$\mathcal{S}$:\emph{course}(\emph{cid,course\_name}) :-
+$\mathcal{O}$:\emph{Course}(\emph{x}),
+\flushright{
+$\mathcal{O}$:\emph{hasCID}(\emph{x,cid}),
+$\mathcal{O}$:\emph{hasCourseName}(\emph{x,course\_name}).
+}
+\end{type}
+\begin{type}
+\label{typ2}
+关系数据库模式中关系类型关系与外键类型属性与本体中对象属性的复杂映射。例如： 
+
+$\mathcal{S}$:\emph{takes\_course}(\emph{sid,cid}) :-
+$\mathcal{O}$:\emph{Student}(\emph{x}),
+$\mathcal{O}$:\emph{hasSID}(\emph{x,sid}),
+\flushright{
+$\mathcal{O}$:\emph{Course}(\emph{y}),
+$\mathcal{O}$:\emph{hasCID}(\emph{y,cid}),
+$\mathcal{O}$:\emph{takesCourse}(\emph{x,y}).
+}
+\end{type}
+\begin{type}
+\label{typ3}
+关系数据库模式中具有分类特征的属性（categorical attribute）和本体类的复杂映射。
+例如：
+
+$\mathcal{S}$:\emph{student}(\emph{sid,\_,ta\_of})[NULL / \emph{ta\_of}] :-
+$\mathcal{O}$:\emph{Undergraduate}(\emph{x}),
+$\mathcal{O}$:\emph{hasSID}(\emph{x,sid}).
+\end{type}
+
+需要注意的是，由于关系数据库和归纳逻辑编程都基于封闭世界假设\cite{19}，而本体
+采用开放世界假设，故采用本文中提到的方法可能会带来少数推理错误，相关问题在文献
+\cite{20}中已有一些研究，我们将在未来工作中进一步探索。
+

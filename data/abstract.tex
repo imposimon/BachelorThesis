@@ -1,0 +1,38 @@
+\begin{abstract}
+伴随语义网的发展，语义网本体数量激增。然而万维网上绝大多数的数据仍存储在关系数据
+库中。建立关系数据库模式与语义网本体间的映射是一种实现两者之间互操作性的有效途径
+。本文提出一种基于语义的关系数据库模式与OWL本体间的映射方法SMap，包含简单映射发
+现和复杂映射学习两个阶段。在简单映射发现阶段，首先通过逆向工程规则将关系数据库模
+式和本体中的元素对应地分入不同类别，再为每个元素构建虚拟文档并计算它们之间的相似
+度，其中针对不同类别的元素设计了不同的虚拟文档抽取方案。在复杂映射学习阶段，基于
+已发现的简单映射以及重叠的数据库记录和本体实例，自动化地生成训练事实数据，然后运
+用归纳逻辑编程算法学习出多种类型的基于Horn规则的复杂映射。使用AJAX技术和JAVA编程
+语言设计并实现了一个原型系统，真实数据集上的实验结果表明，SMap在简单映射发现和复
+杂映射学习上均明显优于现有的关系数据库模式与本体间映
+射方法。
+\end{abstract}
+
+\keywords{本体映射； 模式匹配； 关系数据库； 虚拟文档； 归纳逻辑编程}
+
+\begin{englishabstract}
+Ontologies proliferate with the development of the Semantic Web. Most data on 
+the Web, however, are still stored in relational databases (RDBs). Createing
+mappings between RDB schemas and ontologies is an effective way for
+establishing the interoperability between them. In this paper, we propose SMap
+-- a semantic approach to create mappings between RDB schemas and OWL ontologies.
+SMap consists of two main stages: finding simple mappings and learning complex
+mappings. In the first stage, the elements in an RDB schema and an ontology are
+classified correspondingly into different categories, and the virtual documents
+for the elements are built in terms of their categories and then matched for
+similarities. In the second stage, based upon the pre-found simple mappings as
+well as overlapped RDB records and ontology instances, the facts for inductive
+logic programming are automatically collected, in order to learn different types
+of Horn-rule-like complex mappings. We designed and implemented a prototype 
+system using AJAX and JAVA. Experimental results on real-world datasets
+demonstrate that, SMap outperforms existing approaches significantly on both
+simple mapping finding and complex mapping learning. 
+\end{englishabstract}
+
+\englishkeywords{ontology mapping; schema matching; relational database;
+virtual document; inductive logic programming}
+\clearpage

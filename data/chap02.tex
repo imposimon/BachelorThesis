@@ -1,0 +1,170 @@
+\chapter{简单映射的发现}
+\label{chap02}
+
+简单映射的发现主要分为两个步骤：基于逆向工程规则的元素分类和基于虚拟文档的简单
+映射发现。
+
+\section{元素类型分类}
+\label{2:1}
+文献\cite{14}在对关系数据库逆向工程的研究中，将关系分为4种不相交的类型：强实体
+类型关系（strong entity relation，简称SER）、弱实体类型关系（weak entity
+relation，简称WER）、常规关系类型关系（regular relationship relation，简称RRR）
+、以及特殊关系类型关系（specific relationship relation，简称SRR）。而属性也可
+简单地分为两类：外键类型属性（FKA）和非外键类型属性（NFKA）。
+
+具体判别规则如下：如果一个关系的所有主键均不是外键，则该关系属于强实体类型关系
+，例如图\ref{fig:db}中的\emph{student}；如果关系的所有主键均为外键，并且主键数目
+大于2，则属于常规关系类型关系，例如图\ref{fig:db}中的\emph{takes\_courese}；
+而对于弱实体类型关系和特殊关系类型关系，则需要推理和人工参与。如果一个关系是强
+实体类型关系的子关系，也就是说该关系中的部分主键作为外键，并且仅只想某一个强实
+体类型关系，则这个关系属于弱实体类型关系；对于特殊关系类型关系的判断与之相似。
+如果上述自动推理不能判断，则需要人工参与识别。另外，有时还需要存储的实例数据加
+以验证。对于外键类型属性和非外键类型属性的判别则相对简单，在此不再赘述。
+
+一般而言，一个实体类型关系可以映射到本体中的一个类，而一个关系类型关系可以映射
+到本体中的一个对象属性。例如，图\ref{fig:db}所示的关系\emph{student}可以与类
+\emph{Student}映射；而关系\emph{takes\_course}可以与对象属性\emph{takesCourse}
+映射。类似地，如果一个属性是外键类型属性，则它可以映射到本体中的一个对象属性，
+而一个非外键属性则既可以映射到本体中的一个数据类型属性，也可以映射到一个对象属
+性。这里需要注意一种例外情况，如果一个关系是关系类型关系，则它所有的作为主键
+并且同时作为外键的属性不需要参与映射过程，如图\ref{fig:db}中的关系
+\emph{takes\_course}的属性\emph{\underline{sid}}和\emph{\underline{cid}}
+不必包含在映射结果中，否则会导致重复。
+
+根据上述启发式规则，本文把关系数据库模式和本体中的元素对应地划分为4类：
+
+\begin{itemize}
+\item{$\{\{SER\} \cup \{WER\} \} \times \{C\}$}
+\item{$\{\{RRR\} \cup \{SRR\} \} \times \{P_o\}$}
+\item{$\{FKA\} \times \{P_o\}$}
+\item{$\{NFKA\} \times \{\{P_o\} \cup \{P_d\}\}$}
+\end{itemize}
+
+此外，还设计一些预处理步骤来协调关系数据模式和本体的不同特性。首先，一个关系类
+型关系允许映射到本体中的两个具有互反关系（owl:inverseOf）的对象属性。其次
+，关系数据库模式中的多元关系（$\ge3$）应被具体化（reify）为多个二元关系，因为OWL
+本体只能表达一元或二元关系。另外，还对关系数据库和本体中常见的数据类型做抽象，
+将主要数据类型归为整型、浮点型、字符型、日期型和布尔型。请注意，这里的预处理步
+骤并不是完备的，但是它们涵盖了较多的实际情况。
+
+\section{基于虚拟文档的简单映射发现}
+\label{2:2}
+受文献\cite{15}的启发，本文考虑引入关系数据库模式和本体间的结构特征来体现它们对
+应的语义信息。比如关系数据库中的引用完整性约束连接了两个关系，而OWL本体可以表示
+为RDF图的形式，该图结构包含了重要的语义信息。
+
+本文为关系数据库模式和本体中的每个元素构建虚拟文档（virtual document），记作
+$vdoc()$，以捕获它们所含的语义信息。一个虚拟文档形如一个加权的单词集合，不仅包含
+元素自身的自然语言描述，还引入周围相邻元素的自然语言描述。
+
+为了度量一个单词的重要程度，本文采用了TF-IDF模型\cite{32}。TF-IDF用于表示一个单
+词对于一个文档集合中一个文档的重要程度。其中，词频TF（term frequency）指某单词
+在某文档中出现的频率。对于文档$d$中的特定单词$t$来说，其词频计算公式为：
+
+\begin{equation}
+tf_{t,d} = \frac{n_{t,d}}{\sum_{k}n_{k,d}}
+\end{equation}
+
+其中$n_{t,d}$表示单词$t$在文档$d$中的出现次数，分母$\sum_{k}n_{k,d}$
+表示文档$d$中所有单词的出现次数之和。
+
+逆向文档频率IDF（inverse document frequency）反映了一个单词在一个文档集合中的
+普遍重要性。对于某单词$t$，其逆向文档频率计算公式为：
+
+\begin{equation}
+idf_t = log \frac{|D|}{|\{j:t \in d_j\}|} 
+\end{equation}
+
+其中$|D|$表示文档集合$D$中的文档总数，$|\{j:t \in d_j\}|$表示包含单词$t$
+的文档数量。词频和逆向文档频率的乘积即为TF-IDF值：
+
+\begin{equation}
+tf\textrm{-}idf_{t,d} = tf_{t,d} \times idf_t
+\end{equation}
+
+虚拟文档中采用单词的TF-IDF值作为其权值，单词的权值反映其重要程度。
+每个虚拟文档可以被看成是一个TF-IDF模型中的向量。本文为属于不同类别的元素构建
+不同的虚拟文档。
+
+对于关系数据库模式中的一个关系$R$，如果它属于实体类型关系，则它的虚拟文档是它
+自身的自然语言描述；而如果属于关系类型的关系，则它的虚拟文档不仅是其自身的自然
+语言描述，还包括它所引用的关系的描述。形式化描述如下：
+
+\begin{equation}
+vdoc(R)=
+\begin{cases}
+desc(R)
+\qquad \qquad \qquad \qquad \qquad \qquad \qquad
+ R \in \{\emph{SER}\} \cup \{\emph{WER}\}
+\\
+desc(R)+ \alpha \ast \sum\limits_{A^\prime \in ref(A) \atop A \in pk(R)}
+desc(rel(A^\prime))
+\qquad \ R \in \{\emph{RRR}\} \cup \{\emph{SRR}\}
+\end{cases}
+\end{equation}
+
+对于关系数据库模式中的一个属性A，除了其自身的自然语言描述外（含所属的关系），如
+果它是外键类型属性，则还进一步考虑它引用的属性所属的关系的描述；而如果是非外键
+类型属性，则补充考虑它的数据类型，具体公式如下:
+
+\begin{equation}
+vdoc(A)=
+\begin{cases}
+desc(A)+ \alpha \ast (desc(rel(A)) + \sum\limits_{A^\prime \in ref(A)}
+desc(rel(A^\prime)))
+\ \ A \in \{\emph{FKA}\}
+\\
+desc(A)+ \alpha \ast desc(rel(A)) + \beta \ast desc(type(A))
+\qquad \ A \in \{\emph{NFKA}\}
+\end{cases}
+\end{equation}
+
+对于本体中的一个类$C$，它的虚拟文档就是其自身的自然语言描述，写作如下公式：
+
+\begin{equation}
+vdoc(C) = desc(C)
+\end{equation}
+
+对于本体中的一个属性$P$，不仅考虑其自身的自然语言描述，还考虑它的定义与和值域
+。请注意，如果一个属性是数据类型属性，此时它的值域为它的数据类型。公式如下：
+
+\begin{equation}
+vdoc(P)=
+\begin{cases}
+desc(P) + \alpha \ast (
+	\sum\limits_{C \in d(P)} desc(C) +
+	\sum\limits_{C \in r(P)} desc(C))
+\qquad \ P \in \{P_o\}
+\\
+desc(P) + \alpha \ast \sum\limits_{C \in d(P)} desc(C)
+	+ \beta \ast desc(r(P))
+\qquad \quad  P \in \{P_d\}
+\end{cases}
+\end{equation}
+
+为简单起见，$desc()$仅返回元素的本地名（local name）作为它自身的自然语言描述。
+$\alpha$和$\beta$为赋予不同邻居的权重，是两个固定的有理数，属于值域$[0,1]$
+。这两个参数的值应当依据实际应用而设定。根据我们的经验，$\alpha$一般比$\beta$
+略大。
+
+为了展示虚拟文档的构建过程，请看图\ref{fig:db}中的关系类型关系
+\emph{takes\_course}。它自身的自然语言描述是\{``takes'',``course''\}，
+且存在两个邻居关系\emph{course}和\emph{student}。\emph{takes\_course}的虚拟
+文档为$vdoc(takes\_course)=
+\{\mbox{``take''},(1+\alpha)\ast\mbox{``course''},
+\alpha\ast\mbox{``student''}
+\}$。
+
+通过计算元素之间的相似度获得简单映射。任意两个元素之间的相似度通过计算它们单词
+向量之间的余弦值获得，这两个向量分别对应两个虚拟文档。相似度的计算公式如下：
+
+\begin{equation}
+sim(vdoc_i,vdoc_j)=cos(\overrightarrow{N_i},\overrightarrow{N_j})=\frac
+	{\sum_{k=1}^{D}n_{ik}n_{jk}}
+	{\sqrt{ \sum_{k=1}^{D}n_{ik}^{2} 
+		\sum_{k=1}^{D}n_{jk}^{2}
+	}}
+\end{equation}
+
+其中$D$是向量空间的维度，$n_{ik}$和$n_{jk}$是向量中的元素。如果两个虚拟文档没
+有共同的单词则其相似度为0，而如果两个虚拟文档完全相同则相似度为1。
